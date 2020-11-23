@@ -46,7 +46,7 @@ function GlobeCpmt(props) {
 
     return (
         <Globe
-            width={`${size.width}`}
+            width={size.width * .9}
             height={window.innerHeight / 2}
             ref={globeEl}
             globeImageUrl="//unpkg.com/three-globe/example/img/earth-dark.jpg"
@@ -61,7 +61,7 @@ function GlobeCpmt(props) {
       `}
         // polygonsTransitionDuration={transitionDuration}
         />
-        );
+    );
 };
 
 function useWindowSize() {
