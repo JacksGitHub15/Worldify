@@ -69,6 +69,7 @@ import {
       }
     };
   };
+
   export const initiateLoadMoreArtists = (url) => {
     return async (dispatch) => {
       try {
@@ -81,6 +82,7 @@ import {
       }
     };
   };
+  
   export const initiateLoadMorePlaylist = (url) => {
     return async (dispatch) => {
       try {

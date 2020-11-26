@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import Header from './Header';
 import { Redirect } from 'react-router-dom';
+
 const Home = (props) => {
   const {
     REACT_APP_CLIENT_ID,
@@ -35,4 +36,5 @@ const Home = (props) => {
     </React.Fragment>
   );
 };
+
 export default connect()(Home);

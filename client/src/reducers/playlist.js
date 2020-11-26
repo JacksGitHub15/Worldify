@@ -1,4 +1,5 @@
 import { SET_PLAYLIST, ADD_PLAYLIST } from '../utils/constants';
+
 const playlistReducer = (state = {}, action) => {
   const { playlists } = action;
   switch (action.type) {
@@ -14,4 +15,5 @@ const playlistReducer = (state = {}, action) => {
       return state;
   }
 };
+
 export default playlistReducer;

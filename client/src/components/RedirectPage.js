@@ -23,5 +23,3 @@ export default class RedirectPage extends React.Component {
     return null;
   }
 }
-
-

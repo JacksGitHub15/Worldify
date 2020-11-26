@@ -4,10 +4,12 @@ import Home from '../components/Home';
 import RedirectPage from '../components/RedirectPage';
 import Dashboard from '../components/Dashboard';
 import NotFoundPage from '../components/NotFoundPage';
+
 class AppRouter extends React.Component {
   state = {
     expiryTime: '0'
   };
+
   componentDidMount() {
     let expiryTime;
     try {
@@ -17,9 +19,11 @@ class AppRouter extends React.Component {
     }
     this.setState({ expiryTime });
   }
+
   setExpiryTime = (expiryTime) => {
     this.setState({ expiryTime });
   };
+
   isValidSession = () => {
     const currentTime = new Date().getTime();
     const expiryTime = this.state.expiryTime;
@@ -27,6 +31,7 @@ class AppRouter extends React.Component {
 
     return isSessionValid;
   };
+
   render() {
     return (
       <BrowserRouter>
@@ -62,4 +67,5 @@ class AppRouter extends React.Component {
     );
   }
 }
+
 export default AppRouter;

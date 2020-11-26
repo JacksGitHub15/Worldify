@@ -2,6 +2,7 @@ import React from 'react';
 import { Card } from 'react-bootstrap';
 import _ from 'lodash';
 import music from '../images/music.jpeg';
+
 const ArtistsList = ({ artists }) => {
   return (
     <React.Fragment>
@@ -39,4 +40,5 @@ const ArtistsList = ({ artists }) => {
     </React.Fragment>
   );
 };
+
 export default ArtistsList;

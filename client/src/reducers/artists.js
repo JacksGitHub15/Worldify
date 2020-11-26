@@ -1,4 +1,5 @@
 import { SET_ARTISTS, ADD_ARTISTS } from '../utils/constants';
+
 const artistsReducer = (state = {}, action) => {
   const { artists } = action;
   switch (action.type) {
@@ -14,4 +15,5 @@ const artistsReducer = (state = {}, action) => {
       return state;
   }
 };
+
 export default artistsReducer;
