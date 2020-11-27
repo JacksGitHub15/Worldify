@@ -4,7 +4,8 @@ import {
     SET_ARTISTS,
     ADD_ARTISTS,
     SET_PLAYLIST,
-    ADD_PLAYLIST
+    ADD_PLAYLIST,
+    SET_TRACKARTISTS
   } from '../utils/constants';
   
   import { get } from '../utils/api';
@@ -37,6 +38,11 @@ import {
   export const addPlaylist = (playlists) => ({
     type: ADD_PLAYLIST,
     playlists
+  });
+
+  export const setTrackArtists = (trackArtists) => ({
+    type: SET_TRACKARTISTS,
+    trackArtists
   });
 
   export const initiateGetResult = (searchTerm) => {
