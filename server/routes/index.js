@@ -1,10 +1,10 @@
-const express = require('express');
+const express = require("express");
 
 const router = express.Router();
-const axios = require('axios');
-const locs = require('../public/data/country-codes-lat-long-alpha3.json');
+const axios = require("axios");
+const locs = require("../public/data/country-codes-lat-long-alpha3.json");
 
-router.get('/artistSearch', async (req, res) => {
+router.get("/artistSearch", async (req, res) => {
   const { artist } = req.query;
   const countries = [];
   const requests = artist.map((item) =>
@@ -24,7 +24,7 @@ router.get('/artistSearch', async (req, res) => {
           .map((country) => locs[country])
       );
     })
-    .catch((e) => res.send(e));
+    .catch((e) => res.status(500).send(e));
 });
 
 module.exports = router;
