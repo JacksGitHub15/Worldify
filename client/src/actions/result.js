@@ -8,7 +8,7 @@ import {
     SET_TRACKARTISTS
   } from '../utils/constants';
   
-  import { get } from '../utils/api';
+  import { getSpotify } from '../utils/api';
 
   export const setAlbums = (albums) => ({
     type: SET_ALBUMS,
@@ -51,7 +51,7 @@ import {
         const API_URL = `https://api.spotify.com/v1/search?query=${encodeURIComponent(
           searchTerm
         )}&type=album,playlist,artist`;
-        const result = await get(API_URL);
+        const result = await getSpotify(API_URL);
         console.log(result);
         const { albums, artists, playlists } = result;
         dispatch(setAlbums(albums));
@@ -67,7 +67,7 @@ import {
     return async (dispatch) => {
       try {
         console.log('url', url);
-        const result = await get(url);
+        const result = await getSpotify(url);
         console.log('categoriess', result);
         return dispatch(addAlbums(result.albums));
       } catch (error) {
@@ -80,7 +80,7 @@ import {
     return async (dispatch) => {
       try {
         console.log('url', url);
-        const result = await get(url);
+        const result = await getSpotify(url);
         console.log('categoriess', result);
         return dispatch(addArtists(result.artists));
       } catch (error) {
@@ -93,7 +93,7 @@ import {
     return async (dispatch) => {
       try {
         console.log('url', url);
-        const result = await get(url);
+        const result = await getSpotify(url);
         console.log('categoriess', result);
         return dispatch(addPlaylist(result.playlists));
       } catch (error) {

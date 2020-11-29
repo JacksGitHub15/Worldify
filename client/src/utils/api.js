@@ -4,14 +4,18 @@
 import axios from 'axios';
 import { setAuthHeader } from './functions';
 
-export const get = async (url, params) => {
+export const getSpotify = async (url, params) => {
   setAuthHeader();
   const result = await axios.get(url, params);
   return result.data;
 };
 
-export const post = async (url, params) => {
+export const postSpotify = async (url, params) => {
   setAuthHeader();
   const result = await axios.post(url, params);
   return result.data;
 };
+
+export const getTADB = async (url, params) => {
+  return fetch('https://www.theaudiodb.com/api/v1/json/1/search.php?s=coldplay')
+}
