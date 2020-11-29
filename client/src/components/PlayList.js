@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Card } from 'react-bootstrap';
 import _ from 'lodash';
 import music from '../images/music.jpeg';
-import { get } from '../utils/api';
+import { getSpotify, getTADB } from '../utils/api';
 import { SET_TRACKARTISTS } from '../utils/constants';
 import { useDispatch } from 'react-redux';
+import axios from 'axios';
 
 const PlayList = ({ playlist }) => {
 
@@ -13,12 +14,22 @@ const PlayList = ({ playlist }) => {
   const [selectedPlaylist, setSelectedPlaylist] = useState('')
   useEffect(() => {
     selectedPlaylist &&
-      get(`https://api.spotify.com/v1/playlists/${selectedPlaylist}`).then((res) => res.tracks.items.map(item => {
-        return item?.track?.name, item?.track?.artists[0]?.name
-      })).then(res => (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') ? res.slice(0, 20).filter(artist => artist === undefined) :res)
+      getSpotify(`https://api.spotify.com/v1/playlists/${selectedPlaylist}`)
+        .then((res) => res.tracks.items.map(item => {
+          return item?.track?.artists[0]?.name
+        }))
+        // Only return the first 20 artists if React is in development mode
+        // filters out undefined values
+        .then(res => (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') ? res.slice(0, 20).filter(artist => artist !== undefined) : res)
         .then(res => {
           dispatch({ type: SET_TRACKARTISTS, trackArtists: res })
-          console.log(res)
+          console.log(res[0][1])
+          axios.get('http://localhost:4000/artistSearch', {
+            params: { artist: res }
+          })
+            // .then(res => JSON.parse(res.data.body)?.artists?.[0].strCountryCode)
+            .then(res => console.log(res))
+            .catch(err => console.error(err))
         })
 
     return () => {
