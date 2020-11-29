@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 import albumsReducer from '../reducers/albums';
 import artistsReducer from '../reducers/artists';
 import playlistReducer from '../reducers/playlist';
-import trackArtistsReducer from '../reducers/tracks';
+import locationsReducer from '../reducers/locations';
 
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 const store = createStore(
@@ -12,7 +12,7 @@ const store = createStore(
     albums: albumsReducer,
     artists: artistsReducer,
     playlist: playlistReducer,
-    tracks: trackArtistsReducer
+    locations: locationsReducer
   }, devToolsEnhancer),
   composeEnhancers(applyMiddleware(thunk))
 );
