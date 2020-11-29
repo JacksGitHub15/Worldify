@@ -3,7 +3,7 @@ import { Card } from 'react-bootstrap';
 import _ from 'lodash';
 import music from '../images/music.jpeg';
 import { getSpotify, getTADB } from '../utils/api';
-import { SET_TRACKARTISTS } from '../utils/constants';
+import { SET_LOCATIONS } from '../utils/constants';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 
@@ -22,13 +22,15 @@ const PlayList = ({ playlist }) => {
         // filters out undefined values
         .then(res => (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') ? res.slice(0, 20).filter(artist => artist !== undefined) : res)
         .then(res => {
-          dispatch({ type: SET_TRACKARTISTS, trackArtists: res })
           console.log(res[0][1])
           axios.get('http://localhost:4000/artistSearch', {
             params: { artist: res }
           })
             // .then(res => JSON.parse(res.data.body)?.artists?.[0].strCountryCode)
-            .then(res => console.log(res))
+            .then(res => {
+              dispatch({ type: SET_LOCATIONS, locations: res.data })
+              console.log(res)
+            })
             .catch(err => console.error(err))
         })
 

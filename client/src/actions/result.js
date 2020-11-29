@@ -5,7 +5,7 @@ import {
     ADD_ARTISTS,
     SET_PLAYLIST,
     ADD_PLAYLIST,
-    SET_TRACKARTISTS
+    SET_LOCATIONS
   } from '../utils/constants';
   
   import { getSpotify } from '../utils/api';
@@ -40,9 +40,9 @@ import {
     playlists
   });
 
-  export const setTrackArtists = (trackArtists) => ({
-    type: SET_TRACKARTISTS,
-    trackArtists
+  export const setLocations = (locations) => ({
+    type: SET_LOCATIONS,
+    trackArtists: locations
   });
 
   export const initiateGetResult = (searchTerm) => {
