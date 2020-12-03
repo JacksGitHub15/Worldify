@@ -9,7 +9,7 @@ const playlistReducer = (state = {}, action) => {
       return {
         ...state,
         next: playlists.next,
-        items: [...state.items, ...playlists.items]
+        items: [...state.items, ...playlists.items],
       };
     default:
       return state;

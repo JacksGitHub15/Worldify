@@ -9,7 +9,7 @@ const artistsReducer = (state = {}, action) => {
       return {
         ...state,
         next: artists.next,
-        items: [...state.items, ...artists.items]
+        items: [...state.items, ...artists.items],
       };
     default:
       return state;

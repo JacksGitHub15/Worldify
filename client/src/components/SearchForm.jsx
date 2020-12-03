@@ -5,8 +5,8 @@ const SearchForm = (props) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   const handleInputChange = (event) => {
-    const searchTerm = event.target.value;
-    setSearchTerm(searchTerm);
+    const formSearchTerm = event.target.value;
+    setSearchTerm(formSearchTerm);
   };
 
   const handleSearch = (event) => {

@@ -1,16 +1,17 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 import _ from 'lodash';
+import PropType from 'prop-types';
 import music from '../images/music.jpeg';
 
 const AlbumsList = ({ albums }) => {
   return (
-    <React.Fragment>
+    <>
       {Object.keys(albums).length > 0 && (
         <div className="albums">
-          {albums.items.map((album, index) => {
+          {albums.items.map((album) => {
             return (
-              <React.Fragment key={index}>
+              <React.Fragment key={album.id}>
                 <Card style={{ width: '18rem' }}>
                   <a
                     target="_blank"
@@ -42,8 +43,12 @@ const AlbumsList = ({ albums }) => {
           })}
         </div>
       )}
-    </React.Fragment>
+    </>
   );
 };
 
 export default AlbumsList;
+
+AlbumsList.propTypes = {
+  albums: PropType.object.isRequired,
+};

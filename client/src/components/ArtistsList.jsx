@@ -5,12 +5,12 @@ import music from '../images/music.jpeg';
 
 const ArtistsList = ({ artists }) => {
   return (
-    <React.Fragment>
+    <>
       {Object.keys(artists).length > 0 && (
         <div className="artists">
-          {artists.items.map((artist, index) => {
+          {artists.items.map((artist) => {
             return (
-              <React.Fragment key={index}>
+              <React.Fragment key={artist.id}>
                 <Card style={{ width: '18rem' }}>
                   <a
                     target="_blank"
@@ -37,7 +37,7 @@ const ArtistsList = ({ artists }) => {
           })}
         </div>
       )}
-    </React.Fragment>
+    </>
   );
 };
 
