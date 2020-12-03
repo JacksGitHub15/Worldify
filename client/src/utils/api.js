@@ -15,7 +15,3 @@ export const postSpotify = async (url, params) => {
   const result = await axios.post(url, params);
   return result.data;
 };
-
-export const getTADB = async (url, params) => {
-  return fetch('https://www.theaudiodb.com/api/v1/json/1/search.php?s=coldplay')
-}
