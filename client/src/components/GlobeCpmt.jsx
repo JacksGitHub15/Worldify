@@ -6,7 +6,7 @@ import useWindowSize from '../utils/hooks';
 function GlobeCpmt() {
   const globeEl = useRef();
   const [countries, setCountries] = useState({ features: [] });
-  // TODO: latitudes
+  // TODO: Remove `ESLint disable` comment
   // eslint-disable-next-line no-unused-vars
   const [latlong, setLatlong] = useState({});
   // const [arcs, setArcs] = useState(["GB", "US"]);

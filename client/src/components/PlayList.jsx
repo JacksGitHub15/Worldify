@@ -12,6 +12,7 @@ const PlayList = ({ playlist }) => {
 
   const [selectedPlaylist, setSelectedPlaylist] = useState('');
   useEffect(() => {
+    // TODO: Remove `ESLint disable` comment
     // eslint-disable-next-line no-unused-expressions
     selectedPlaylist &&
       getSpotify(`https://api.spotify.com/v1/playlists/${selectedPlaylist}`)
