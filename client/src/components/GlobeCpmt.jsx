@@ -3,15 +3,11 @@ import Globe from 'react-globe.gl';
 import axios from 'axios';
 import useWindowSize from '../utils/hooks';
 
-function GlobeCpmt() {
+function GlobeCpmt(props) {
   const globeEl = useRef();
   const [countries, setCountries] = useState({ features: [] });
-  // TODO: Remove `ESLint disable` comment
-  // eslint-disable-next-line no-unused-vars
-  const [latlong, setLatlong] = useState({});
-  // const [arcs, setArcs] = useState(["GB", "US"]);
-  // const [userLocation, setUserLocation] = useState(["IE", 53, -8]);
-  // const [transitionDuration, setTransitionDuration] = useState(1000);
+  const [locs, setLocs] = useState([]);
+  const { arcs } = props;
 
   const size = useWindowSize();
 
@@ -28,19 +24,23 @@ function GlobeCpmt() {
       .then((res) => res.data)
       .then((res) => {
         setCountries(res);
-
-        // setTimeout(() => {
-        //     setTransitionDuration(4000);
-        //     setAltitude(() => feat => Math.max(0.1, Math.sqrt(+feat.properties.POP_EST) * 7e-5));
-        // }, 3000);
-      });
-    axios
-      .get('./data/country-codes-lat-long-alpha3.json')
-      .then((res) => res.data)
-      .then((data) => {
-        setLatlong(data);
       });
   }, []);
+
+  useEffect(() => {
+    const keys = ['endLat', 'endLng', 'startLat', 'startLng'];
+
+    const ret = arcs.map((item) => {
+      const r = {};
+      for (let i = 0; i < 4; i += 1) {
+        r[keys[i]] = item[i];
+      }
+      return r;
+    });
+    console.log('Arcs:', arcs);
+    console.log(ret);
+    setLocs(ret);
+  }, [arcs]);
 
   useEffect(() => {
     // Auto-rotate
@@ -56,6 +56,8 @@ function GlobeCpmt() {
       height={window.innerHeight / 2}
       ref={globeEl}
       globeImageUrl="//unpkg.com/three-globe/example/img/earth-dark.jpg"
+      arcsData={locs}
+      arcStroke={2}
       polygonsData={countries.features}
       // polygonAltitude={altitude}
       polygonCapColor={getRandomColor}
