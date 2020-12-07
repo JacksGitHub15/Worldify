@@ -12,7 +12,7 @@ const SearchResult = (props) => {
     loadMore,
     result,
     setCategory,
-    selectedCategory
+    selectedCategory,
   } = props;
   const { albums, artists, playlist } = result;
 
@@ -22,18 +22,19 @@ const SearchResult = (props) => {
         to={{
           pathname: '/',
           state: {
-            session_expired: true
-          }
+            session_expired: true,
+          },
         }}
       />
     );
   }
 
   return (
-    <React.Fragment>
+    <>
       <div className="search-buttons">
         {!_.isEmpty(albums.items) && (
           <button
+            type="button"
             className={`${
               selectedCategory === 'albums' ? 'btn active' : 'btn'
             }`}
@@ -44,6 +45,7 @@ const SearchResult = (props) => {
         )}
         {!_.isEmpty(artists.items) && (
           <button
+            type="button"
             className={`${
               selectedCategory === 'artists' ? 'btn active' : 'btn'
             }`}
@@ -54,6 +56,7 @@ const SearchResult = (props) => {
         )}
         {!_.isEmpty(playlist.items) && (
           <button
+            type="button"
             className={`${
               selectedCategory === 'playlist' ? 'btn active' : 'btn'
             }`}
@@ -74,13 +77,17 @@ const SearchResult = (props) => {
       </div>
       {!_.isEmpty(result[selectedCategory]) &&
         !_.isEmpty(result[selectedCategory].next) && (
-          <div className="load-more" onClick={() => loadMore(selectedCategory)}>
-            <Button variant="info" type="button">
+          <div className="load-more">
+            <Button
+              variant="info"
+              type="button"
+              onClick={() => loadMore(selectedCategory)}
+            >
               Load More
             </Button>
           </div>
         )}
-    </React.Fragment>
+    </>
   );
 };
 

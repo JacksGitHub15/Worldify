@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import {
   initiateGetResult,
   initiateLoadMoreAlbums,
   initiateLoadMorePlaylist,
-  initiateLoadMoreArtists
+  initiateLoadMoreArtists,
 } from '../actions/result';
-
-import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import SearchResult from './SearchResult';
 import SearchForm from './SearchForm';
 import Header from './Header';
@@ -30,8 +29,8 @@ const Dashboard = (props) => {
       history.push({
         pathname: '/',
         state: {
-          session_expired: true
-        }
+          session_expired: true,
+        },
       });
     }
   };
@@ -57,8 +56,8 @@ const Dashboard = (props) => {
       history.push({
         pathname: '/',
         state: {
-          session_expired: true
-        }
+          session_expired: true,
+        },
       });
     }
   };
@@ -71,7 +70,7 @@ const Dashboard = (props) => {
   const result = { albums, artists, playlist };
 
   return (
-    <React.Fragment>
+    <>
       {isValidSession() ? (
         <div>
           <Header />
@@ -90,12 +89,12 @@ const Dashboard = (props) => {
           to={{
             pathname: '/',
             state: {
-              session_expired: true
-            }
+              session_expired: true,
+            },
           }}
         />
       )}
-    </React.Fragment>
+    </>
   );
 };
 
@@ -103,7 +102,7 @@ const mapStateToProps = (state) => {
   return {
     albums: state.albums,
     artists: state.artists,
-    playlist: state.playlist
+    playlist: state.playlist,
   };
 };
 
