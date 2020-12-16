@@ -6,9 +6,22 @@ import axios from 'axios';
 import music from '../images/music.jpeg';
 import { getSpotify } from '../utils/api';
 import { SET_LOCATIONS } from '../utils/constants';
+import GlobeCpmt from './GlobeCpmt';
+import { createGlobeArcs } from '../utils/functions';
+import countries from './country-codes-lat-long-alpha3.json';
 
 const PlayList = ({ playlist }) => {
   const dispatch = useDispatch();
+
+  // eslint-disable-next-line no-unused-vars
+  const [arcs, setArcs] = useState([]);
+
+  const storeArcs = (arcData) => {
+    console.log(arcData);
+    setArcs(
+      [...arcData].map((item) => Object.entries(item).map((kv) => kv[1]))
+    );
+  };
 
   const [selectedPlaylist, setSelectedPlaylist] = useState('');
   useEffect(() => {
@@ -36,7 +49,11 @@ const PlayList = ({ playlist }) => {
             // .then(res => JSON.parse(res.data.body)?.artists?.[0].strCountryCode)
             .then((locations) => {
               dispatch({ type: SET_LOCATIONS, locations: locations.data });
-              console.log(locations);
+              getSpotify(`https://api.spotify.com/v1/me`).then((cntry) =>
+                storeArcs(
+                  createGlobeArcs(locations.data, countries[cntry.country])
+                )
+              );
             })
             .catch((err) => console.error(err));
         });
@@ -46,6 +63,7 @@ const PlayList = ({ playlist }) => {
 
   return (
     <div>
+      <GlobeCpmt arcs={arcs} />
       {Object.keys(playlist).length > 0 && (
         <div className="playlist">
           {playlist.items.map((item) => {

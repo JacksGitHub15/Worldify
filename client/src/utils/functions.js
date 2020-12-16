@@ -25,3 +25,13 @@ export const setAuthHeader = () => {
     console.log('Error setting auth', error);
   }
 };
+
+export const createGlobeArcs = (playlistLocs, userCountry) => {
+  return playlistLocs.map((item) => ({
+    country: item.country,
+    endLat: item.latitude,
+    endLng: item.longitude,
+    startLat: userCountry.latitude,
+    startLng: userCountry.longitude,
+  }));
+};
