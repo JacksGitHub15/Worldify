@@ -6,15 +6,19 @@ import useWindowSize from '../utils/hooks';
 function GlobeCpmt(props) {
   const globeEl = useRef();
   const [countries, setCountries] = useState({ features: [] });
+  const [usedCountries, setUsedCountries] = useState([]);
   const [locs, setLocs] = useState([]);
   const { arcs } = props;
 
   const size = useWindowSize();
 
-  const getRandomColor = () => {
-    return `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(
-      Math.random() * 255
-    )}, ${Math.floor(Math.random() * 255)}, 0.6)`;
+  const getRandomColor = (geojson) => {
+    return usedCountries.includes(geojson.properties.ISO_A2)
+      ? 'rgba(79, 219, 121, 0.5)'
+      : 'rgba(0, 27, 54, 0.0)';
+    // return `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(
+    //   Math.random() * 255
+    // )}, ${Math.floor(Math.random() * 255)}, 0.6)`;
   };
 
   useEffect(() => {
@@ -32,11 +36,13 @@ function GlobeCpmt(props) {
 
     const ret = arcs.map((item) => {
       const r = {};
-      for (let i = 0; i < 4; i += 1) {
-        r[keys[i]] = item[i];
+      setUsedCountries([...usedCountries, item[0]]);
+      for (let i = 1; i < 5; i += 1) {
+        r[keys[i - 1]] = item[i];
       }
       return r;
     });
+    console.log(usedCountries);
     console.log('Arcs:', arcs);
     console.log(ret);
     setLocs(ret);
@@ -56,15 +62,16 @@ function GlobeCpmt(props) {
       height={window.innerHeight / 2}
       ref={globeEl}
       globeImageUrl="//unpkg.com/three-globe/example/img/earth-dark.jpg"
+      backgroundImageUrl="./images/starBackground.jpg"
       arcsData={locs}
       arcStroke={2}
       polygonsData={countries.features}
-      // polygonAltitude={altitude}
       polygonCapColor={getRandomColor}
       polygonSideColor={() => 'rgba(0, 100, 0, 0.15)'}
       polygonLabel={({ properties: d }) => `
         <b>${d.ADMIN} (${d.ISO_A2})</b> <br />
         Population: <i>${Math.round(+d.POP_EST / 1e4) / 1e2}M</i>
+        <br />${usedCountries.filter((x) => x === d.ISO_A2).length}
       `}
       // polygonsTransitionDuration={transitionDuration}
     />

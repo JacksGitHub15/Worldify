@@ -4,6 +4,7 @@ const playlistReducer = (state = {}, action) => {
   const { playlists } = action;
   switch (action.type) {
     case SET_PLAYLIST:
+      console.log(playlists);
       return playlists;
     case ADD_PLAYLIST:
       return {

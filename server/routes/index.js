@@ -21,7 +21,12 @@ router.get("/artistSearch", async (req, res) => {
       res.send(
         countries
           .filter((item) => Boolean(item))
-          .map((country) => locs[country])
+          .map((country) => {
+            const locations = locs[country];
+            locations.country = country;
+            console.log(locations);
+            return locations;
+          })
       );
     })
     .catch((e) => res.status(500).send(e));

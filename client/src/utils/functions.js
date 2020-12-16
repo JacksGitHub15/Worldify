@@ -28,6 +28,7 @@ export const setAuthHeader = () => {
 
 export const createGlobeArcs = (playlistLocs, userCountry) => {
   return playlistLocs.map((item) => ({
+    country: item.country,
     endLat: item.latitude,
     endLng: item.longitude,
     startLat: userCountry.latitude,
