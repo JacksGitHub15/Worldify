@@ -22,14 +22,26 @@ router.get("/artistSearch", async (req, res) => {
         countries
           .filter((item) => Boolean(item))
           .map((country) => {
+            switch (country) {
+              case "uk":
+                country = "GB";
+                break;
+              default:
+                break;
+            }
             const locations = locs[country];
+            if (locations === undefined) return "Uknown";
+            console.log(country);
             locations.country = country;
             console.log(locations);
             return locations;
           })
       );
     })
-    .catch((e) => res.status(500).send(e));
+    .catch((e) => {
+      res.status(500).send(e);
+      console.log(e);
+    });
 });
 
 module.exports = router;

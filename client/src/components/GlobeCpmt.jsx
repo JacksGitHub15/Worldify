@@ -33,15 +33,17 @@ function GlobeCpmt(props) {
 
   useEffect(() => {
     const keys = ['endLat', 'endLng', 'startLat', 'startLng'];
-
+    const tempCountries = [];
     const ret = arcs.map((item) => {
       const r = {};
-      setUsedCountries([...usedCountries, item[0]]);
+      console.log(item[0]);
+      tempCountries.push(item[0]);
       for (let i = 1; i < 5; i += 1) {
         r[keys[i - 1]] = item[i];
       }
       return r;
     });
+    setUsedCountries(tempCountries);
     console.log(usedCountries);
     console.log('Arcs:', arcs);
     console.log(ret);
@@ -69,9 +71,8 @@ function GlobeCpmt(props) {
       polygonCapColor={getRandomColor}
       polygonSideColor={() => 'rgba(0, 100, 0, 0.15)'}
       polygonLabel={({ properties: d }) => `
-        <b>${d.ADMIN} (${d.ISO_A2})</b> <br />
-        Population: <i>${Math.round(+d.POP_EST / 1e4) / 1e2}M</i>
-        <br />${usedCountries.filter((x) => x === d.ISO_A2).length}
+        <b>${d.ADMIN}</b> <br />
+        # of songs: ${usedCountries.filter((x) => x === d.ISO_A2).length}
       `}
       // polygonsTransitionDuration={transitionDuration}
     />

@@ -25,6 +25,7 @@ const PlayList = ({ playlist }) => {
 
   const [selectedPlaylist, setSelectedPlaylist] = useState('');
   useEffect(() => {
+    console.log(process.env.NODE_ENV);
     // TODO: Remove `ESLint disable` comment
     // eslint-disable-next-line no-unused-expressions
     selectedPlaylist &&
@@ -39,7 +40,7 @@ const PlayList = ({ playlist }) => {
         .then((artists) =>
           !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
             ? artists.slice(0, 20).filter((artist) => artist !== undefined)
-            : artists
+            : artists.filter((artist) => artist !== undefined)
         )
         .then((artists) => {
           axios
